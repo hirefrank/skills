@@ -18,7 +18,7 @@ import * as yaml from "yaml"
 const SKILLS_DIR = "skills"
 const DIST_DIR = "dist/skills"
 const R2_BUCKET = "agent-skills"
-const R2_PREFIX = "skills"
+const R2_PREFIX = "d"
 const CLOUDFLARE_ACCOUNT_ID = "6034f1c5d23e5503f6573740480cf0d6"
 
 // D1 database for advisor lookups (network-jobs variants)
