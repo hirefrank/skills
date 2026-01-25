@@ -1,0 +1,22 @@
+name = "my-bhvr-app"
+compatibility_date = "2024-09-23"
+main = "server/src/index.ts"
+
+# SINGLE ORIGIN CONFIGURATION
+# Upload the React build as assets served by Cloudflare
+assets = { directory = "./client/dist", binding = "ASSETS" }
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "prod-db"
+database_id = "your-database-id-here"
+
+# R2 Storage Binding (optional)
+# [[r2_buckets]]
+# binding = "BUCKET"
+# bucket_name = "your-bucket-name"
+
+[vars]
+# Better-Auth URL (same origin)
+BETTER_AUTH_URL = "https://your-app.com"

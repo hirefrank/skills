@@ -1,0 +1,44 @@
+# Project Rules: "bhvr" Single Origin Stack
+
+## Architecture
+- **Topology:** Single Origin. API and Client on same domain.
+- **Assets:** React build located in `client/dist`, served via `wrangler.toml` [assets].
+- **API:** Hono Worker handles `/api/*`.
+
+## Stack Components
+- **Deploy Target:** Cloudflare Workers with Assets Binding
+- **Database:** Cloudflare D1 accessed via Kysely
+- **Auth:** Better-Auth with Email OTP + Kysely Adapter
+- **Frontend:** React + Vite + Tailwind v4 + shadcn/ui
+- **Backend:** Hono
+
+## Core Principles
+1. **Zero CORS:** Client and Server share origin - no CORS configuration needed
+2. **Remote-First:** Develop against real Cloudflare infrastructure (`wrangler dev --remote`)
+3. **Physical Separation:** Maintain `client` and `server` workspace separation
+
+## Routing Rules
+1. **Client:** Use relative paths for API calls (e.g., `fetch('/api/user')`). Do not hardcode domains.
+2. **Server:** Do NOT serve static files in Hono code. The platform handles it via Assets binding.
+3. **Auth:** Configure Better-Auth `baseURL` to `/api/auth`.
+
+## Development Workflow
+- **Start:** `bun run dev` - Builds client then starts `wrangler dev --remote`
+- **Backend dev:** Edit `server/src/index.ts` - HMR is instant
+- **Frontend dev:** Run `cd client && bun vite` separately on port 5173 for HMR
+
+## Deployment
+- Always run `bun run build:client` before `wrangler deploy`
+- The deploy script handles this automatically
+- Use `wrangler dev --remote` for accurate D1/R2 emulation
+
+## File Structure
+```
+/
+├── client/              # React + Vite
+│   ├── dist/            # (Generated at build time)
+│   └── vite.config.ts
+├── server/              # Hono Worker
+│   └── src/index.ts     # API Routes
+└── wrangler.toml        # Single Origin Config
+```

@@ -1,0 +1,22 @@
+{
+  "name": "my-bhvr-app",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run build:client && wrangler dev --remote",
+    "build:client": "cd client && bun run build",
+    "deploy": "bun run build:client && wrangler deploy",
+    "db:migrate": "wrangler d1 migrations apply prod-db --remote"
+  },
+  "dependencies": {
+    "hono": "^4.6.14",
+    "better-auth": "^1.1.3",
+    "kysely": "^0.27.4",
+    "kysely-d1": "^0.3.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "wrangler": "^3.94.0"
+  }
+}

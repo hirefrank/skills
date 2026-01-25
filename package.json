@@ -1,0 +1,20 @@
+{
+  "name": "agent-skills",
+  "version": "1.0.0",
+  "description": "Agent skills registry - build and deploy skills to R2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "skills:build": "bun run scripts/build-skills.ts",
+    "skills:deploy": "bun run scripts/build-skills.ts --deploy",
+    "skills:list": "bun run scripts/build-skills.ts --list"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.13",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.25.0"
+  },
+  "dependencies": {
+    "yaml": "^2.8.2"
+  }
+}
