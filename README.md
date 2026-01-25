@@ -1,27 +1,79 @@
 # Agent Skills
 
-A collection of [Agent Skills](https://agentskills.io) for extending AI agent capabilities.
+A collection of [Agent Skills](https://agentskills.io/) for AI coding agents. Skills are packaged instructions and scripts that extend agent capabilities.
 
-## Skills
-
-| Skill | Version | Description |
-|-------|---------|-------------|
-| [bhvr-cloudflare](skills/bhvr-cloudflare) | 1.0.0 | Build full-stack apps on Cloudflare Workers with single-origin architecture |
-| [intro-email-generator](skills/intro-email-generator) | 1.2.1 | Craft compelling, forwardable introduction emails for job referrals |
-| [network-jobs](skills/network-jobs) | 2.0.4 | Search job openings at companies where you have connections |
-
-## Usage
-
-Skills follow the [Agent Skills specification](https://agentskills.io/specification). Each skill contains a `SKILL.md` file with metadata and instructions.
-
-### Installing a Skill
-
-Download the skill package and extract it to your agent's skills directory:
+## Installation
 
 ```bash
-# Example for Claude Code
-curl -L https://github.com/hirefrank/skills/raw/main/dist/skills/bhvr-cloudflare-1.0.0.zip -o skill.zip
-unzip skill.zip -d ~/.claude/skills/
+npx add-skill hirefrank/skills
+```
+
+Or copy skill directories manually to the appropriate location for your agent:
+
+| Agent | Skill Directory | Docs |
+|-------|-----------------|------|
+| Claude Code | `~/.claude/skills/` | [docs](https://docs.anthropic.com/en/docs/claude-code/skills) |
+| OpenCode | `~/.config/opencode/skill/` | [docs](https://opencode.ai/docs/skills/) |
+| OpenAI Codex | `~/.codex/skills/` | [docs](https://developers.openai.com/codex/skills/) |
+| Pi | `~/.pi/agent/skills/` | [docs](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#skills) |
+
+## Available Skills
+
+### bhvr-cloudflare
+
+Build full-stack apps on Cloudflare Workers with single-origin architecture (Bun, Hono, Vite, React).
+
+**Use when:**
+- Setting up a new bhvr project on Cloudflare Workers
+- Reviewing code for architecture compliance
+- Implementing features with zero CORS patterns
+- Troubleshooting D1, R2, or Better-Auth issues
+- Working with Cloudflare Workers Assets
+
+**Includes:**
+- Project templates (wrangler.toml, package.json, vite.config.ts)
+- Hono API starter and Better-Auth client config
+- Troubleshooting guide for common issues
+
+### intro-email-generator
+
+Craft compelling, forwardable introduction emails for job referrals.
+
+**Use when:**
+- Asking a mutual connection to intro you to someone at a company
+- Writing emails that can be forwarded without editing
+- Connecting your resume to a specific job opportunity
+
+**Features:**
+- Analyzes resume against job requirements
+- Generates concise, metric-backed emails
+- Addresses the forwarder (not the target contact)
+
+### network-jobs
+
+Search job openings at companies where you have connections through your network.
+
+**Use when:**
+- "Do I have connections at [Company]?"
+- "Find me PM jobs in NYC"
+- "What's new in engineering roles?"
+- "Remote jobs paying over $200k"
+
+**Features:**
+- Searches jobs via advisor network data
+- Filters by role, location, seniority, salary
+- Links to intro-email-generator for outreach
+
+## Skill Structure
+
+Each skill follows the [Agent Skills specification](https://agentskills.io/specification):
+
+```
+skill-name/
+├── SKILL.md          # Instructions and metadata (required)
+├── scripts/          # Helper scripts (optional)
+├── references/       # Supporting documentation (optional)
+└── assets/           # Templates and resources (optional)
 ```
 
 ## Development
@@ -34,37 +86,18 @@ unzip skill.zip -d ~/.claude/skills/
 ### Commands
 
 ```bash
-# Install dependencies
-bun install
-
-# List available skills
-bun run skills:list
-
-# Build all skills
-bun run skills:build
-
-# Build and deploy to R2
-bun run skills:deploy
+bun install              # Install dependencies
+bun run skills:list      # List available skills
+bun run skills:build     # Build all skills to dist/
+bun run skills:deploy    # Build and deploy to R2
 ```
 
-### Creating a New Skill
+## Resources
 
-1. Create a new directory under `skills/`
-2. Add a `SKILL.md` file with required frontmatter:
-
-```yaml
----
-name: my-skill
-description: What the skill does and when to use it.
-metadata:
-  version: "1.0.0"
----
-```
-
-3. Add instructions in the markdown body
-4. Optionally add `references/`, `scripts/`, or `assets/` directories
-
-See the [Agent Skills specification](https://agentskills.io/specification) for details.
+- [Agent Skills Specification](https://agentskills.io/specification)
+- [Anthropic Skills Documentation](https://docs.anthropic.com/en/docs/claude-code/skills)
+- [Example Skills (Anthropic)](https://github.com/anthropics/skills)
+- [Example Skills (Cloudflare)](https://github.com/cloudflare/skills)
 
 ## License
 
