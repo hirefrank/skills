@@ -5,7 +5,7 @@ A collection of [Agent Skills](https://agentskills.io/) for AI coding agents. Sk
 ## Installation
 
 ```bash
-npx add-skill hirefrank/skills
+npx skills add https://github.com/hirefrank/skills
 ```
 
 Or copy skill directories manually to the appropriate location for your agent:
