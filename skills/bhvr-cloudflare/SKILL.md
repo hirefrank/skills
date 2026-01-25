@@ -1,6 +1,9 @@
 ---
 name: bhvr-cloudflare
 description: Build full-stack apps on Cloudflare Workers with single-origin architecture (Bun, Hono, Vite, React). Use when setting up bhvr projects, reviewing code for architecture compliance, implementing features with zero CORS, troubleshooting D1/Better-Auth, or working with Cloudflare Workers Assets.
+license: MIT
+metadata:
+  version: "1.0.0"
 ---
 
 # bhvr Cloudflare
