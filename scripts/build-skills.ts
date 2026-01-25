@@ -150,7 +150,7 @@ async function deploySkill(zipPath: string): Promise<boolean> {
   try {
     await $`CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID} npx wrangler r2 object put ${R2_BUCKET}/${r2Key} --file=${absoluteZipPath} --remote`
 
-    console.log(`✓ Deployed to r2://${R2_BUCKET}/${r2Key}`)
+    console.log(`✓ Deployed to https://skills.hirefrank.com/${r2Key}`)
     return true
   } catch (e) {
     console.error(`Failed to deploy ${zipName}:`, e)
@@ -290,15 +290,15 @@ async function main(): Promise<void> {
     }
   }
 
-  // Show R2 URLs if deployed
+  // Show download URLs if deployed
   if (shouldDeploy) {
     const deployedResults = results.filter((r) => r.deployed && r.zipPath)
     if (deployedResults.length > 0) {
-      console.log("\nR2 Keys:")
+      console.log("\nDownload URLs:")
       for (const r of deployedResults) {
         if (r.zipPath) {
           const zipName = path.basename(r.zipPath)
-          console.log(`  ${R2_BUCKET}/${R2_PREFIX}/${zipName}`)
+          console.log(`  https://skills.hirefrank.com/${R2_PREFIX}/${zipName}`)
         }
       }
     }
