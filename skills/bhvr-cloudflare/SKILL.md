@@ -3,7 +3,7 @@ name: bhvr-cloudflare
 description: Build full-stack apps on Cloudflare Workers with single-origin architecture (Bun, Hono, Vite, React). Use when setting up bhvr projects, reviewing code for architecture compliance, implementing features with zero CORS, troubleshooting D1/Better-Auth, or working with Cloudflare Workers Assets.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # bhvr Cloudflare
@@ -26,6 +26,11 @@ Build full-stack applications with a single-origin architecture on Cloudflare Wo
 - Develop against real Cloudflare infrastructure
 - Use `wrangler dev --remote` for accurate D1 and R2 behavior
 - Avoid local emulation discrepancies
+
+**Explicit Observability**
+- Never ship bare `observability.enabled = true`
+- Cloudflare Workers Logs can be enabled by default on new Workers, and unspecified sampling defaults to 100%
+- Treat persistent logs as an opt-in cost decision, not a harmless default
 
 **Physical Separation**
 - Maintain `client` and `server` workspace separation
@@ -75,6 +80,28 @@ Copy these templates from `assets/`:
 **wrangler.toml** must include:
 ```toml
 assets = { directory = "./client/dist", binding = "ASSETS" }
+```
+
+**wrangler.toml** should also make observability explicit:
+```toml
+[observability]
+enabled = false
+```
+
+If a project needs persisted production logs by default, use an explicit low-volume policy instead of a bare enable:
+```toml
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 0.02
+persist = false
+invocation_logs = false
+
+[observability.traces]
+enabled = false
 ```
 
 **package.json** must build client before deploy:
@@ -232,6 +259,9 @@ When reviewing or auditing a bhvr project, verify:
 ### Deployment
 - [ ] Deploy script builds client before deploying
 - [ ] `BETTER_AUTH_URL` set to production domain
+- [ ] Observability is explicit in Wrangler config, never left as a bare default
+- [ ] Default production stance is `enabled = false` unless there is an active reason to keep sampled logs on
+- [ ] If logs stay on, `invocation_logs` is disabled and sampling is explicitly capped
 
 ## Common Issues
 
