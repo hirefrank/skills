@@ -49,20 +49,20 @@ Craft compelling, forwardable introduction emails for job referrals.
 - Generates concise, metric-backed emails
 - Addresses the forwarder (not the target contact)
 
-### network-jobs
+Pairs well with **[Network Jobs](https://hirefrank.com/network-jobs)** (separate install) for finding roles at companies where you have connections, then drafting intros with this skill.
 
-Search job openings at companies where you have connections through your network.
+## Network Jobs (separate product)
 
-**Use when:**
-- "Do I have connections at [Company]?"
-- "Find me PM jobs in NYC"
-- "What's new in engineering roles?"
-- "Remote jobs paying over $200k"
+Job search over your **local** LinkedIn graph and job corpus is not in this repo. Install the [Network Jobs](https://hirefrank.com/network-jobs) suite from [hirefrank/network-jobs](https://github.com/hirefrank/network-jobs):
 
-**Features:**
-- Searches jobs via advisor network data
-- Filters by role, location, seniority, salary
-- Links to intro-email-generator for outreach
+```bash
+npm i -g @hirefrank/network-jobs@latest
+network-jobs setup --agent auto
+```
+
+Or: `npx skills add hirefrank/network-jobs -g -a cursor` (then run `network-jobs setup` for data and the CLI).
+
+The hosted API at `jobs.hirefrank.com` was retired; use the local-first suite above.
 
 ## Skill Structure
 

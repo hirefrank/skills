@@ -114,11 +114,11 @@ For more examples, see [examples.md](examples.md).
 
 ## Related Skills
 
-**network-jobs** - Search job openings at companies where you have connections through your network. Use this skill first to find opportunities, then use intro-email-generator to craft the outreach email.
+**[Network Jobs](https://hirefrank.com/network-jobs)** — local-first job search over the user's LinkedIn graph and corpus (`hirefrank/network-jobs`). Use it to find opportunities, then use intro-email-generator for outreach. Install: `network-jobs setup --agent auto` (not part of the hirefrank/skills repo).
 
-## Integration with network-jobs
+## Integration with Network Jobs
 
-If the user found a job using the network-jobs skill:
+If the user found a job using the Network Jobs suite (local `~/.network-jobs/` corpus or `network-jobs search`):
 - The job URL is already available from the search results
 - The company and role context can be pulled from the job data
 - Ask for the user's resume and the name of their connection (the forwarder)
